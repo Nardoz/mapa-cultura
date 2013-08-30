@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<widget xmlns = "http://www.w3.org/ns/widgets"
+xmlns:gap = "http://phonegap.com/ns/1.0"
+id = "com.phonegapessentials.ex192"
+version = "1.0.0">
+
+  <name>hhba</name>
+  <description>hhba example</description>
+  <author href="http://ww.com" email="bitmind">bitmind</author>
+    
+  <icon src="logo.gif" />
+ <plugin name="NetworkStatus" value="org.apache.cordova.NetworkManager" />
+    
+  <gap:platforms>
+    <gap:platform name="android" minVersion="2.1" />
+    <gap:platform name="webos" />
+    <gap:platform name="symbian.wrt" />
+    <gap:platform name="blackberry" project="widgets"/>
+  </gap:platforms>
+     
+  <feature name="http://api.phonegap.com/1.0/battery" />
+  <feature name="http://api.phonegap.com/1.0/camera" />
+  <feature name="http://api.phonegap.com/1.0/contacts" />
+  <feature name="http://api.phonegap.com/1.0/file" />
+  <feature name="http://api.phonegap.com/1.0/geolocation" />
+  <feature name="http://api.phonegap.com/1.0/media" />
+  <feature name="http://api.phonegap.com/1.0/network" />
+  <feature name="http://api.phonegap.com/1.0/notification" />
+</widget>
+
