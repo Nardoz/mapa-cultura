@@ -45,6 +45,7 @@
     
     <!-- cartodb connector -->
     <script src="js/cartodbData.js"></script>
+
     <style type="text/css">
       .filtro {
         color: black;
@@ -61,64 +62,140 @@
         height: 100%;
       }
 
+      .header-menu{
+        position: absolute;
+        top: 10px;
+      }
+
+      .search-bar{
+        position: relative;
+        padding: 0px 50px;
+        z-index: 999;
+        line-height: 40px;
+      }
+
+      .search-query#filtro{
+        height: 30px;
+        line-height: 19px;
+        width: 80%;
+        margin-bottom: 10px;
+        -webkit-border-radius: 0px;
+        -moz-border-radius: 0px;
+        border-radius: 0px;
+      }
+
+      #search-query-btn{
+        -webkit-border-radius: 0px;
+        -moz-border-radius: 0px;
+        border-radius: 0px;
+        margin-right: 10px;
+      }
+
+      #btngroup1{
+         float:right;  
+         margin-left:10px;
+      }
+
+      #btngroup2{
+        float:right; 
+        margin-left:40px;
+      }
+
       a.btn i {
         line-height: 20px;
       }
 
+      a.btn {
+        margin-top: 5px;
+      }
+
+      a.btn.search {
+        margin-top: 0px;
+      }
+
       @media (max-width: 767px){
-        body{
+        body {
           padding-left: 0px;
           padding-right: 0px;
         }
+
+        i {
+          font-size: 20px;
+        }
+
+        #btngroup1{
+          margin: 0 auto;
+          padding: 0px;
+        }
+
+        #btngroup2{
+          margin: 0 auto;
+          padding: 0px;
+        }
+
       }
     </style>
     
-    <div class="navbar">
-      <div class="navbar-inner">
+    <div class="header-menu">
+      <div class="search-bar">
+
         <form class="form-search navbar-search" id="search-form">
           <div class="input-append">
-            <input type="text" class="search-query" placeholder="Search" id='filtro' style="
-              height: 30px;
-              line-height: 19px;
-              margin-bottom: 10px;
-            "/>
-            <a class="btn tipo_check" href="#" title="Buscar"><i class="icon-search"></i></a>
+            <input type="text" class="search-query" placeholder="Buscar" id='filtro'/>
+            <a class="btn search" href="#" title="Buscar">
+              <i class="icon-search"></i>
+            </a>
           </div>
         </form>
 
-        <div class="btn-group" data-toggle="buttons-checkbox" 
-          style="float:right; margin-left:20px; margin-button:20px;">
+        <div id="btngroup1" class="btn-group" data-toggle="buttons-checkbox">
           <a class="btn sub_tipo_check active act" href="#" title="Salas de Cine, Espacios INCAA">
             <i class="icon-film"></i>
           </a>
-          <a class="btn sub_tipo_check" href="#" title="Salas teatrales"><i class="icon-group"></i></a>
-          <a class="btn sub_tipo_check" href="#" title="Librerías"><i class="icon-book"></i></a>
+          <a class="btn sub_tipo_check" href="#" title="Salas teatrales">
+            <i class="icon-group"></i>
+          </a>
+          <a class="btn sub_tipo_check" href="#" title="Librerías">
+            <i class="icon-book"></i>
+          </a>
           <a class="btn sub_tipo_check" href="#" title="Bibliotecas populares, Biliotecas especializadas">
             <i class="icon-home"></i>
           </a>
-          <a class="btn sub_tipo_check" href="#" title="Radios"><i class="icon-microphone"></i></a>
+          <a class="btn sub_tipo_check" href="#" title="Radios">
+            <i class="icon-microphone"></i>
+          </a>
         </div>
 
-        <div class="btn-group" data-toggle="buttons-checkbox" style="float:right; margin-left:20px;">
+        <div id="btngroup1" class="btn-group" data-toggle="buttons-checkbox">
           <a class="btn cluster_check active act" href="#">
             <i class="icon-cogs"></i>
           </a>
         </div>
-
-        <div class="btn-group" data-toggle="buttons-checkbox" style="float:right; margin-left:20px;">
-          <a class="btn tipo_check" href="#" title="Espacios Culturales"><i class="icon-picture"></i></a>
-          <a class="btn tipo_check" href="#" title="Industrias Culturales"><i class="icon-truck"></i></a>
-          <a class="btn tipo_check" href="#" title="Festivales"><i class="icon-trophy"></i></a>
-          <a class="btn tipo_check" href="#" title="Patrimonio"><i class="icon-info-sign"></i></a>
+        
+        <div id="btngroup2" class="btn-group" data-toggle="buttons-checkbox">
+          <a class="btn tipo_check" href="#" title="Espacios Culturales">
+            <i class="icon-picture"></i>
+          </a>
+          <a class="btn tipo_check" href="#" title="Industrias Culturales">
+            <i class="icon-truck"></i>
+          </a>
+          <a class="btn tipo_check" href="#" title="Festivales">
+            <i class="icon-trophy"></i>
+          </a>
+          <a class="btn tipo_check" href="#" title="Patrimonio">
+            <i class="icon-info-sign"></i>
+          </a>
         </div>
 
       </div>
 
-      <div id='map' class='map' ></div>
     </div>
-    
+    <div style="clear:both;">
+      <div id='map' class='map'></div>
+    </div>
     <script src="js/main.js"></script>
   </body>
+
   <script>
     // cartoDB configuration
     var config = {
