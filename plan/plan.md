@@ -27,9 +27,9 @@ OpenRefine: http://openrefine.org/
 2. provincia:
 
   facetar por provincia
-  
+
   trim - remove two whitespaces
-  
+
   cluster
 
 3. eliminar puntos sin direcciones
@@ -82,7 +82,7 @@ facet by star
 
 2. crear columna direccion_geo
 
-value + ', ' + 
+value + ', ' +
 cells.provincia.value + ', Argentina'
 
 3. crear columna osm_geo
@@ -129,7 +129,7 @@ select * from cultura where nombre like '%Konex%'
 
 wizards - category - tipo
 
-visualize - publish 
+visualize - publish
 
 share
 
@@ -153,7 +153,7 @@ tenemos el repositorio original (opensas)
 nuestro repositorio forkeado en github (sscarano)
 nuestro repositorio clonado localmente
 
-me logueo como opensas
+me logueo como sscarano
 
 https://github.com/sscarano
 
@@ -184,7 +184,7 @@ mostrar la funcionalidad
 filtrar por tipos, por calle rivadavia, corriente, etc..
 
 explicar qué es un servidor web
-servidor web de archivos - 
+servidor web de archivos -
 o dinámico
 
 explicar qué se ejecuta en el cliente, y qué en el servidor
@@ -194,12 +194,16 @@ mostrar como por cada operacion realizamos consultas contra el web service
 
 http://devel.cartodb.com/api/v2/sql?q=
 select
-	tipo, subtipo, nombre, direccion, telefono, email, web, lat, lon 
-from 
-	cultura 
+  tipo, subtipo, nombre, direccion, telefono, email, web, lat, lon
+from
+  cultura
 where
-	(lower(nombre) like '%konex%' or lower(direccion) like '%konex%') and 
-	(lower(tipo) in ('espacios culturales'))
+  (lower(nombre) like '%konex%' or lower(direccion) like '%konex%') and
+  (lower(tipo) in ('espacios culturales'))
+
+encoded
+
+http://devel.cartodb.com/api/v2/sql?q=select%0A%20%20tipo%2C%20subtipo%2C%20nombre%2C%20direccion%2C%20telefono%2C%20email%2C%20web%2C%20lat%2C%20lon%0Afrom%0A%20%20cultura%0Awhere%0A%20%20%28lower%28nombre%29%20like%20%27%25konex%25%27%20or%20lower%28direccion%29%20like%20%27%25konex%25%27%29%20and%0A%20%20%28lower%28tipo%29%20in%20%28%27espacios%20culturales%27%29%29
 
 copiar y pegar y mostrar el json
 

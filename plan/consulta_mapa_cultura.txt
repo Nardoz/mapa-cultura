@@ -1,0 +1,15 @@
+http://devel.cartodb.com/api/v2/sql?q=
+select
+  tipo, subtipo, nombre, direccion, telefono, email, web, lat, lon
+from
+  cultura
+where
+  (lower(nombre) like '%konex%' or lower(direccion) like '%konex%') and
+  (lower(tipo) in ('espacios culturales'))
+
+
+https://tinyurl.com/consulta-mapa-cultura
+
+encoded
+
+http://devel.cartodb.com/api/v2/sql?q=select%0A%20%20tipo%2C%20subtipo%2C%20nombre%2C%20direccion%2C%20telefono%2C%20email%2C%20web%2C%20lat%2C%20lon%0Afrom%0A%20%20cultura%0Awhere%0A%20%20%28lower%28nombre%29%20like%20%27%25konex%25%27%20or%20lower%28direccion%29%20like%20%27%25konex%25%27%29%20and%0A%20%20%28lower%28tipo%29%20in%20%28%27espacios%20culturales%27%29%29
