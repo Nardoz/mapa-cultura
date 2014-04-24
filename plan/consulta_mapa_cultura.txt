@@ -13,3 +13,29 @@ https://tinyurl.com/consulta-mapa-cultura
 encoded
 
 http://devel.cartodb.com/api/v2/sql?q=select%0A%20%20tipo%2C%20subtipo%2C%20nombre%2C%20direccion%2C%20telefono%2C%20email%2C%20web%2C%20lat%2C%20lon%0Afrom%0A%20%20cultura%0Awhere%0A%20%20%28lower%28nombre%29%20like%20%27%25konex%25%27%20or%20lower%28direccion%29%20like%20%27%25konex%25%27%29%20and%0A%20%20%28lower%28tipo%29%20in%20%28%27espacios%20culturales%27%29%29
+
+
+http://devel.cartodb.com/api/v2/sql?q=
+
+select%20tipo%2C%20subtipo%2C%20nombre%2C%20direccion%2C%20telefono%2C%20email%2C%20web%2C%20lat%2C%20lon%20from%20cultura%20where%20(ST_Within(the_geom%2C%20ST_Envelope(ST_GeomFromText('LINESTRING(%20-58.619927160134914%20-34.49019904491863%2C%20-58.233748682150235%20-34.759155413421624%20)'%2C%204326))))%20and%20((lower(subtipo)%20in%20('salas%20de%20cine'%2C%20'espacios%20incaa')))
+
+
+select
+  tipo, subtipo, nombre, direccion, telefono, email, web,
+  lat, lon
+from
+  cultura
+where (
+  ST_Within(the_geom,
+    ST_Envelope(
+      ST_GeomFromText(
+        'LINESTRING(
+          -58.619927160134914 -34.49019904491863,
+          -58.233748682150235 -34.759155413421624
+        )', 4326
+      )
+    )
+  )
+) and (
+  (lower(subtipo) in ('salas de cine', 'espacios incaa'))
+)
