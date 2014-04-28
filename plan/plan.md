@@ -92,7 +92,7 @@ value.escape('url')
 
 4. eliminamos las que no trajeron resultado - columna status
 
-value.parseJson().lenght()
+value.parseJson().length()
 filter
 remove rows
 remove column status
