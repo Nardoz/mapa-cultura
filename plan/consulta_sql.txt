@@ -1,0 +1,36 @@
+http://devel.cartodb.com/api/v2/sql?q=
+
+select
+  tipo, subtipo, nombre, direccion, telefono,
+  email, web, lat, lon
+from cultura
+where
+  (
+    ST_Within(the_geom,
+      ST_Envelope(ST_GeomFromText(
+      'LINESTRING(
+        -58.684030872409735 -34.54266933297768,
+        -58.16792835610589 -34.707602053615354 )', 4326
+      )
+    ))
+  )
+and
+  (
+    lower(nombre) like '%corrientes%' or lower(direccion) like '%corrientes%')
+    and
+    lower(subtipo) in ('salas de cine', 'espacios incaa')
+)
+
+
+
+--
+
+La aplicacion de ejemplo del taller de datos públicos de @FlisolCABA corriendo en www.nardoz.com/mapa-cultura
+
+Seguí este link para instalarte la aplicacion mobile de ejemplo del taller de datos públicos de @FlisolCABA https://build.phonegap.com/apps/529950/share
+
+Los slides de la aplicacion de ejemplo del del taller de datos públicos de @FlisolCABA http://www.nardoz.com/mapa-cultura/slides/mediaparty_rendered.svg
+
+El repo de la aplicacion de ejemplo del del taller de datos públicos de @FlisolCABA https://github.com/Nardoz/mapa-cultura
+
+

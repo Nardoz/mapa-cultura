@@ -39,3 +39,19 @@ where (
 ) and (
   (lower(subtipo) in ('salas de cine', 'espacios incaa'))
 )
+
+
+
+
+
+
+
+--
+
+La aplicacion de ejemplo del taller de datos públicos de @FlisolCABA corriendo en www.nardoz.com/mapa-cultura
+
+Seguí este link para instalarte la aplicacion mobile de ejemplo del taller de datos públicos de @FlisolCABA https://build.phonegap.com/apps/529950/share
+
+Los slides de la aplicacion de ejemplo del del taller de datos públicos de @FlisolCABA http://www.nardoz.com/mapa-cultura/slides/mediaparty_rendered.svg
+
+El repo de la aplicacion de ejemplo del del taller de datos públicos de @FlisolCABA https://github.com/Nardoz/mapa-cultura
