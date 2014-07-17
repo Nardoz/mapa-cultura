@@ -22,7 +22,7 @@ $(function() {
 
   renderAddresses = function() {
 
-    var filtro = $('#filtro').val() || '';
+    var filtro = $('#search').val() || '';
 
     var tipos = _.map($('.tipo_check.todo-done'), function(item) {
       return $(item).attr('data-tipo');
@@ -33,7 +33,7 @@ $(function() {
     });
     subTipos = _.flatten(subTipos);
 
-    var cluster = $('.cluster_check').hasClass('todo-done');
+    var cluster = $('li.clusterMarkers div.switch div').hasClass('switch-on');
 
     map.spin(true);
     fetchLocations(filtro, tipos, subTipos, map.getBounds(), function(data) {
@@ -45,11 +45,11 @@ $(function() {
   }
 
   map.updateCluster = function() {
-    var filtro = $('#filtro').val() || '';
-    var cluster = $('.cluster_check').hasClass('todo-done');
+    var filtro = $('#search').val() || '';
+    var cluster = $('li.clusterMarkers div.switch div').hasClass('switch-on');
 
     map.spin(true);
-    // allow dom to repaint, 
+    // allow dom to repaint,
     // see http://stackoverflow.com/a/4005365, http://stackoverflow.com/a/12022571
     window.setTimeout(function() {
       map.renderAddresses(map.data, filtro, cluster);
@@ -170,14 +170,15 @@ $(function() {
     return this;
   };
 
-  $('#filtro').on('input', _.debounce(function(e) {
+  $('#search').on('input', _.debounce(function(e) {
     renderAddresses();
   }, 800));
 
-  $('.cluster_check').on('click', function(e) {
-    $(e.currentTarget).toggleClass('todo-done');
-    // renderAddresses();
-    map.updateCluster();
+  $('.clusterMarkers').on('click', function(e) {
+    // give time for switch plugin to change the value of the checkbox
+    window.setTimeout(function() {
+      map.updateCluster();
+    }, 100);
   });
 
   $('.tipo_check').on('click', function(e) {

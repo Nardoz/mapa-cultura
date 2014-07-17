@@ -6,15 +6,12 @@
   <body>
 
     <!-- twitter bootstrap -->
-    <!-- <link href="css/bootstrap-combined.min.css" rel="stylesheet"> -->
-    
-    <!-- twitter bootstrap -->
     <link href="css/bootstrap.css" rel="stylesheet">
 
     <!-- flat-ui bootstrap -->
     <link href="css/flat-ui.css" rel="stylesheet">
 
-    <!-- floaing-menu -->
+    <!-- floating-menu -->
     <link href="css/floating-menu.css" rel="stylesheet">
 
    <!-- leaflet -->
@@ -31,12 +28,18 @@
     <link href="css/bootstrap-combined.no-icons.min.css" rel="stylesheet">
     <link href="css/font-awesome.css" rel="stylesheet">
 
+    <!-- cutom CSS -->
+    <link rel="stylesheet" href="css/main.css" />
+
     <!-- jquery / zepto -->
     <!-- <script src="js/lib/zepto.min.js"></script> -->
     <script src="js/lib/jquery-2.0.3.min.js"></script>
 
     <!-- twitter bootstrap -->
     <script src="js/lib/bootstrap.min.js"></script>
+
+    <!-- Flat UI Controls -->
+    <script src="js/lib/bootstrap-switch.js"></script>
 
     <!-- leaflet -->
     <script src="js/lib/leaflet.js"></script>
@@ -63,17 +66,6 @@
     <!-- main -->
     <script src="js/main.js"></script>
 
-    <style type="text/css">
-      html, body, #map {
-        height: 100%;
-      }
-      .filtro {
-        color: black;
-        font-weight:bold;
-        background-color: yellow
-      }
-    </style>
-
     <div id="cd-nav" class="is-fixed">
       <a href="#0" class="cd-nav-trigger">Menu<span></span></a>
 
@@ -81,18 +73,17 @@
 
         <div class="todo">
           <div class="todo-search">
-            <input class="todo-search-field" id="filtro" style="width:85%" type="search" value="" placeholder="buscar...">
+            <input id="search" class="todo-search-field" type="search" value="" placeholder="buscar...">
           </div>
-          <ul>
 
-            <li class="cluster_check">
-              <div class="todo-icon fui-user"></div>
-              <div class="todo-content">
-                <h4 class="todo-name">Agrupar marcadores</h4>
-                Agrupar marcadores cercanos
+          <ul class="todolist">
+
+            <li class="clusterMarkers">
+              <strong class="share-label" for="share-toggle6">Agrupar marcadores</strong>
+              <div class="switch switch-square" data-on-label="<i class='fui-check'></i>" data-off-label="<i class='fui-cross'></i>">
+                <input id="cluster_check" type="checkbox" data-toggle="switch"/>
               </div>
             </li>
-
 
             <li class="tipo_check" data-tipo="Espacios Culturales">
               <div class="todo-icon fui-user"></div>
@@ -171,11 +162,6 @@
       <div id='map' class='map'></div>
     </div>
 
-
   </body>
-
-  <script>
-
-  </script>
 
 </html>
