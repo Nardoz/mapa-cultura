@@ -1,383 +1,181 @@
 <html>
   <head>
+    <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   </head>
   <body>
 
     <!-- twitter bootstrap -->
-    <link href="css/bootstrap-combined.min.css" rel="stylesheet">
+    <!-- <link href="css/bootstrap-combined.min.css" rel="stylesheet"> -->
+    
+    <!-- twitter bootstrap -->
+    <link href="css/bootstrap.css" rel="stylesheet">
 
-    <!-- leaflet -->
-    <link rel="stylesheet" href="css/leaflet.css" />
+    <!-- flat-ui bootstrap -->
+    <link href="css/flat-ui.css" rel="stylesheet">
+
+    <!-- floaing-menu -->
+    <link href="css/floating-menu.css" rel="stylesheet">
+
+   <!-- leaflet -->
+    <link href="css/leaflet.css" rel="stylesheet"/>
 
     <!-- leaflet.awesome -->
-    <link rel="stylesheet" href="css/leaflet.awesome-markers.css" />
+    <link href="css/leaflet.awesome-markers.css" rel="stylesheet"/>
 
     <!-- markerCluster -->
-    <link rel="stylesheet" href="css/MarkerCluster.Default.css" />
-    <link rel="stylesheet" href="css/MarkerCluster.css" />
+    <link href="css/MarkerCluster.Default.css" rel="stylesheet"/>
+    <link href="css/MarkerCluster.css" rel="stylesheet"/>
 
     <!-- font-awesome -->
     <link href="css/bootstrap-combined.no-icons.min.css" rel="stylesheet">
     <link href="css/font-awesome.css" rel="stylesheet">
 
     <!-- jquery / zepto -->
-    <script src="js/zepto.min.js"></script>
+    <!-- <script src="js/lib/zepto.min.js"></script> -->
+    <script src="js/lib/jquery-2.0.3.min.js"></script>
 
     <!-- twitter bootstrap -->
-    <script src="js/bootstrap.min.js"></script>
+    <script src="js/lib/bootstrap.min.js"></script>
 
     <!-- leaflet -->
-    <script src="js/leaflet.js"></script>
+    <script src="js/lib/leaflet.js"></script>
 
     <!-- markerCluster -->
-    <script src="js/leaflet.markercluster.min.js"></script>
+    <script src="js/lib/leaflet.markercluster.min.js"></script>
 
     <!-- leaflet.awesome -->
-    <script src="js/leaflet.awesome-markers.min.js"></script>
+    <script src="js/lib/leaflet.awesome-markers.min.js"></script>
 
     <!-- spin.js -->
-    <script src="js/leaflet.spin.js"></script>
-    <script src="js/spin.min.js"></script>
+    <script src="js/lib/leaflet.spin.js"></script>
+    <script src="js/lib/spin.min.js"></script>
 
     <!-- underscore -->
-    <script src="js/underscore-min.js"></script>
+    <script src="js/lib/underscore-min.js"></script>
 
     <!-- cartodb connector -->
     <script src="js/cartodbData.js"></script>
 
+    <!-- floating menu -->
+    <script src="js/floating-menu.js"></script>
+
+    <!-- main -->
+    <script src="js/main.js"></script>
+
     <style type="text/css">
+      html, body, #map {
+        height: 100%;
+      }
       .filtro {
         color: black;
         font-weight:bold;
         background-color: yellow
       }
-
-      body{
-        padding: 0;
-        margin: 0;
-      }
-
-      html, body, #map {
-        height: 100%;
-      }
-
-      .header-menu{
-        position: absolute;
-        top: 10px;
-      }
-
-      .search-bar{
-        position: relative;
-        padding: 0px 50px;
-        z-index: 999;
-        line-height: 40px;
-      }
-
-      .search-query#filtro{
-        height: 30px;
-        line-height: 19px;
-        width: 80%;
-        margin-bottom: 10px;
-        -webkit-border-radius: 0px;
-        -moz-border-radius: 0px;
-        border-radius: 0px;
-      }
-
-      #search-query-btn{
-        -webkit-border-radius: 0px;
-        -moz-border-radius: 0px;
-        border-radius: 0px;
-        margin-right: 10px;
-      }
-
-      #btngroup1{
-         float:right;
-         margin-left:10px;
-      }
-
-      #btngroup2{
-        float:right;
-        margin-left:40px;
-      }
-
-      a.btn i {
-        line-height: 20px;
-      }
-
-      a.btn {
-        margin-top: 5px;
-      }
-
-      a.btn.search {
-        margin-top: 0px;
-      }
-
-      @media (max-width: 767px){
-        body {
-          padding-left: 0px;
-          padding-right: 0px;
-        }
-
-        i {
-          font-size: 20px;
-        }
-
-        #btngroup1{
-          margin: 0 auto;
-          padding: 0px;
-        }
-
-        #btngroup2{
-          margin: 0 auto;
-          padding: 0px;
-        }
-
-      }
     </style>
 
-    <div class="header-menu">
-      <div class="search-bar">
+    <div id="cd-nav" class="is-fixed">
+      <a href="#0" class="cd-nav-trigger">Menu<span></span></a>
 
-        <form class="form-search navbar-search" id="search-form">
-          <div class="input-append">
-            <input type="text" class="search-query" placeholder="Buscar" id='filtro'/>
-            <a class="btn search" href="#" title="Buscar">
-              <i class="icon-search"></i>
-            </a>
+      <nav id="cd-main-nav">
+
+        <div class="todo">
+          <div class="todo-search">
+            <input class="todo-search-field" id="filtro" style="width:85%" type="search" value="" placeholder="buscar...">
           </div>
-        </form>
+          <ul>
 
-        <div id="btngroup1" class="btn-group" data-toggle="buttons-checkbox">
-          <a class="btn sub_tipo_check active act" href="#" title="Salas de Cine, Espacios INCAA">
-            <i class="icon-film"></i>
-          </a>
-          <a class="btn sub_tipo_check" href="#" title="Salas teatrales">
-            <i class="icon-group"></i>
-          </a>
-          <a class="btn sub_tipo_check" href="#" title="Librerías">
-            <i class="icon-book"></i>
-          </a>
-          <a class="btn sub_tipo_check" href="#" title="Bibliotecas populares, Biliotecas especializadas">
-            <i class="icon-home"></i>
-          </a>
-          <a class="btn sub_tipo_check" href="#" title="Radios">
-            <i class="icon-microphone"></i>
-          </a>
+            <li class="cluster_check">
+              <div class="todo-icon fui-user"></div>
+              <div class="todo-content">
+                <h4 class="todo-name">Agrupar marcadores</h4>
+                Agrupar marcadores cercanos
+              </div>
+            </li>
+
+
+            <li class="tipo_check" data-tipo="Espacios Culturales">
+              <div class="todo-icon fui-user"></div>
+              <div class="todo-content">
+                <h4 class="todo-name">Espacios culturales</h4>
+                Centros culturales comunitarios
+              </div>
+            </li>
+
+            <li class="tipo_check" data-tipo="Industrias Culturales">
+              <div class="todo-icon fui-user"></div>
+              <div class="todo-content">
+                <h4 class="todo-name">Industrias culturales</h4>
+                Industrias culturales
+              </div>
+            </li>
+
+            <li class="tipo_check" data-tipo="Festivales">
+              <div class="todo-icon fui-user"></div>
+              <div class="todo-content">
+                <h4 class="todo-name">Festivales</h4>
+                Festivales
+              </div>
+            </li>
+
+            <li class="tipo_check" data-tipo="Patrimonio">
+              <div class="todo-icon fui-user"></div>
+              <div class="todo-content">
+                <h4 class="todo-name">Patrimonio</h4>
+                Patrimonio
+              </div>
+            </li>
+
+            <li class="sub_tipo_check todo-done" data-sub_tipo="Salas de Cine, Espacios INCAA">
+              <div class="todo-icon fui-user"></div>
+              <div class="todo-content">
+                <h4 class="todo-name">Cines</h4>
+                Salas de Cine, Espacio INCAA
+              </div>
+            </li>
+
+            <li class="sub_tipo_check" data-sub_tipo="Salas Teatrales">
+              <div class="todo-icon fui-user"></div>
+              <div class="todo-content">
+                <h4 class="todo-name">Teatros</h4>
+                Salas teatrales
+              </div>
+            </li>
+
+            <li class="sub_tipo_check" data-sub_tipo="Librerías">
+              <div class="todo-icon fui-user"></div>
+              <div class="todo-content">
+                <h4 class="todo-name">Librerías</h4>
+                Librerías
+              </div>
+            </li>
+
+            <li class="sub_tipo_check" data-sub_tipo="Bibliotecas populares, Biliotecas especializadas">
+              <div class="todo-icon fui-user"></div>
+              <div class="todo-content">
+                <h4 class="todo-name">Bibiotecas</h4>
+                Bibliotecas populares y especializadas
+              </div>
+            </li>
+
+
+          </ul>
         </div>
 
-        <div id="btngroup1" class="btn-group" data-toggle="buttons-checkbox">
-          <a class="btn cluster_check active act" href="#">
-            <i class="icon-cogs"></i>
-          </a>
         </div>
 
-        <div id="btngroup2" class="btn-group" data-toggle="buttons-checkbox">
-          <a class="btn tipo_check" href="#" title="Espacios Culturales">
-            <i class="icon-picture"></i>
-          </a>
-          <a class="btn tipo_check" href="#" title="Industrias Culturales">
-            <i class="icon-truck"></i>
-          </a>
-          <a class="btn tipo_check" href="#" title="Festivales">
-            <i class="icon-trophy"></i>
-          </a>
-          <a class="btn tipo_check" href="#" title="Patrimonio">
-            <i class="icon-info-sign"></i>
-          </a>
-        </div>
-
-      </div>
-
+      </nav>
     </div>
+
     <div style="clear:both;">
       <div id='map' class='map'></div>
     </div>
-    <script src="js/main.js"></script>
+
+
   </body>
 
   <script>
-    // cartoDB configuration
-    var config = {
-      user: 'devel',
-      table: 'cultura',
-      debug: true
-    };
 
-     // add an OpenStreetMap tile layer
-    var tileLayer = L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
-      attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-    });
-
-     // create a map in the "map" div, set the view to a given place and zoom
-    var map = L.map('map', {
-      center: [-34.624874, -58.427166],
-      zoom: 12,
-      layers: tileLayer
-    });
-
-    renderAddresses = function() {
-
-      var filter = $('#filtro').val() || '';
-
-      var tipos = _.map($('.tipo_check.active'), function(btn) {
-        return $(btn).attr('title');
-      });
-
-      var subTipos = _.map($('.sub_tipo_check.active'), function(btn) {
-        return $(btn).attr('title').split(',');
-      });
-      subTipos = _.flatten(subTipos);
-
-      var cluster = $('.cluster_check').hasClass('active');
-
-      map.spin(true);
-      fetchLocations(filter, tipos, subTipos, map.getBounds(), function(data) {
-
-        if (map.addresses) map.addresses.clearLayers();
-        map.addresses = cluster ? new L.MarkerClusterGroup() : new L.LayerGroup();
-        map.addLayer(map.addresses);
-        map.renderAddresses(data.rows, filter);
-
-        map.spin(false);
-      }, config);
-    }
-
-     // add a method to my map to render every address
-    map.renderAddresses = function(addresses, filtro) {
-      console.log('rendering ' + addresses.length + ' addresses');
-
-      var formatUrl = function(url) {
-        return url.substr(0, 7) === 'http://' ? url : 'http://' + url;
-      };
-
-      var formatUrlText = function(url) {
-        return url.substr(0, 7) === 'http://' ? url.substr(7) : url;
-      };
-
-      var formatFiltro = function(value, filtro) {
-        if (!filtro) return value;
-        var regExp = new RegExp('(.*)(' + filtro + ')(.*)', 'ig');
-        var matches = regExp.exec(value);
-        if (!matches) return value;
-        return matches[1] + '<span class="filtro">' + matches[2] + '</span>' + matches[3];
-      };
-
-      var color,
-        defaultColor = 'yellow',
-        colors = {
-          'Industrias Culturales': 'blue',
-          'Espacios Culturales': 'green',
-          'Festivales': 'purple',
-          'Patrimonio': 'orange',
-        },
-        icon,
-        defaultIcon = 'tint',
-        icons = {
-          'Organizaciones de la Sociedad Civil': 'building',
-          'Agencia de noticias': 'file',
-          'Editoriales de libros': 'book',
-          'Monumentos y lugares históricos': 'building',
-          'Medios sociales de comunicación': 'bullhorn',
-          'Librerías': 'book',
-          'Patrimonio de la humaniad': 'male',
-          'TV digital abierta': 'youtube-play',
-          'Bibliotecas populares': 'book',
-          'Periódicos digitales': 'comments-all',
-          'Eventos feriales artesanales': 'wrench',
-          'Bibliotecas especializadas': 'book',
-          'Periódicos impresos': 'book',
-          'Feria del libro': 'book',
-          'Casas de la Historia y la Cultura del Bicentenario': 'building',
-          'Canales de TV abierta': 'facetime-video',
-          'Radios': 'microphone',
-          'Fiestas y festivales': 'trophy',
-          'Carreras culturales': 'lightbulbe',
-          'Espacios INCAA': 'film',
-          'Espacios de exhibición patrimonial': 'building',
-          'Rutas y estancias jesuíticas': 'road',
-          'Sellos musicales': 'music',
-          'Salas teatrales': 'group',
-          'Salas de cine': 'film'
-        };
-
-      // optimize loop -> http://stackoverflow.com/a/1340634/47633
-      var location,
-        counter = addresses.length;
-
-      while (counter--) {
-        location = addresses[counter];
-
-        // blue, green, orange, yellow, purple, and violet
-        color = colors[location.tipo] || defaultColor;
-        icon = icons[location.subtipo] || defaultIcon;
-
-        try {
-
-          var message =
-            (location.tipo ? '<b>' + location.tipo + ', ' + location.subtipo + '</b></br>' : '') +
-            (location.nombre ? '<b>' +
-            (filtro ? formatFiltro(location.nombre, filtro) : location.nombre) + '</b></br>' : '') +
-            (location.direccion ? '<b>' +
-            (filtro ? formatFiltro(location.direccion, filtro) : location.direccion) + '</b></br>' : '') +
-            (location.telefono ? location.telefono + '</br>' : '') +
-            (location.email ? '<b>' + location.email + '</b></br>' : '') +
-            (location.web ?
-            '<b><a href="' + formatUrl(location.web) + '" target="_blank">' +
-            formatUrlText(location.web) + '</a></b></br>' : '');
-
-          var marker = L.marker([location.lat, location.lon], {
-            icon: L.AwesomeMarkers.icon({
-              icon: icon,
-              color: color
-            })
-          }).bindPopup(message);
-
-          map.addresses.addLayer(marker);
-
-        } catch (e) {
-          console.log('could not create marker');
-          console.log(location);
-        }
-
-      }
-
-      return this;
-    };
-
-    $('#filtro').on('input', _.debounce(function(e) {
-      renderAddresses();
-    }, 800));
-
-    $('.tipo_check').on('click', function(e) {
-      $(e.currentTarget).toggleClass('active');
-      renderAddresses();
-    });
-
-    $('.sub_tipo_check').on('click', function(e) {
-      $(e.currentTarget).toggleClass('active');
-      renderAddresses();
-    });
-
-    $('.cluster_check').on('click', function(e) {
-      $(e.currentTarget).toggleClass('active');
-      renderAddresses();
-    });
-
-    $(function() {
-      renderAddresses();
-    });
-
-    map.lastZoom = map.getZoom();
-    map.on('moveend', function() {
-      // me acerqué, no traigo nuevos puntos
-      if (map.getZoom() > map.lastZoom) {
-        map.lastZoom = map.getZoom();
-        return;
-      }
-      renderAddresses();
-      map.lastZoom = map.getZoom();
-    });
   </script>
 
 </html>
