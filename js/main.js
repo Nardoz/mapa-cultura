@@ -160,13 +160,11 @@ $(function() {
         map.addresses.addLayer(marker);
 
       } catch (e) {
-        map.spin(false);
         console.log('could not create marker');
         console.log(location);
       }
 
     }
-    // map.spin(false);
     return this;
   };
 
