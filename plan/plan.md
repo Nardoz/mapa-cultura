@@ -133,6 +133,77 @@ visualize - publish
 
 share
 
+3.1 Mostrar más posibilidades de cartoDB
+========================================
+
+1. Bajar el shapefile de departamentos
+
+http://www.aeroterra.com/d-argentinagral.htm
+http://www.aeroterra.com/datosweb/departamentos.zip
+
+Importar en CartoDB
+
+ingresar la siguiente query
+
+SELECT
+provincia,
+departamento,
+cartodb_id,
+the_geom_webmercator,
+(
+  select count(*) from
+  cultura as c where
+  c.subtipo ILIKE 'SALAS TEATRALES' and
+  ST_Contains(d.the_geom, c.the_geom)
+) as puntos
+FROM departamentos as d
+
+Elegir un gráfico de tipo
+choropleth
+bubble
+
+visualizacion: teatros por departamento
+http://cdb.io/1rPfnfi
+
+2. Con una regionalizacion personalizada
+
+ir a http://geojson.io
+
+dibujamos una zona
+
+cargamos de data/zonas_pais.geojson
+
+lo mostramos en cartoDB
+
+ingresar esta query
+
+SELECT
+nombre,
+cartodb_id,
+poblacion,
+the_geom_webmercator,
+(
+  select count(*) from
+  cultura as c where
+  c.subtipo ILIKE 'SALAS TEATRALES' and
+  ST_Contains(z.the_geom, c.the_geom)
+) as puntos
+FROM zonas_pais as z
+
+visualizacion: teatros por zonas
+http://cdb.io/1uCEQ8Q
+
+Otras visualizaciones
+
+UGLs y Oficinas del PAMI http://cdb.io/1pyMmBA
+
+Densidad de oficinas del PAMI http://cdb.io/1pyMKjB
+
+Oficinas del PAMI agrupadas http://cdb.io/1pyN1CY
+
+Oficinas del PAMI por fecha de creación http://cdb.io/YhFZIT
+
+
 --
 
 Mostrar la api que crea CartoDB
