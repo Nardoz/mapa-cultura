@@ -54,6 +54,10 @@
     <script src="js/lib/leaflet.spin.js"></script>
     <script src="js/lib/spin.min.js"></script>
 
+    <!-- heatmap.js https://www.patrick-wied.at/static/heatmapjs/plugin-leaflet-layer.html -->
+    <script src="js/lib/heatmap.min.js"></script>
+    <script src="js/lib/leaflet-heatmap.js"></script>
+
     <!-- underscore -->
     <script src="js/lib/underscore-min.js"></script>
 
@@ -82,6 +86,13 @@
               <strong class="share-label" for="share-toggle6">Agrupar marcadores</strong>
               <div class="switch switch-square" data-on-label="<i class='fui-check'></i>" data-off-label="<i class='fui-cross'></i>">
                 <input id="cluster_check" type="checkbox" data-toggle="switch"/>
+              </div>
+            </li>
+
+            <li class="heatMarkers">
+              <strong class="share-label" for="share-toggle6">Mapa de calor</strong>
+              <div class="switch switch-square" data-on-label="<i class='fui-check'></i>" data-off-label="<i class='fui-cross'></i>">
+                <input id="heat_check" type="checkbox" data-toggle="switch"/>
               </div>
             </li>
 
@@ -151,8 +162,6 @@
 
 
           </ul>
-        </div>
-
         </div>
 
       </nav>

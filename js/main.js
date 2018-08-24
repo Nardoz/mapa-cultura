@@ -34,12 +34,13 @@ $(function() {
     subTipos = _.flatten(subTipos);
 
     var cluster = $('li.clusterMarkers div.switch div').hasClass('switch-on');
+    var heat = $('li.heatMarkers div.switch div').hasClass('switch-on');
 
     map.spin(true);
     fetchLocations(filtro, tipos, subTipos, map.getBounds(), function(data) {
       map.spin(false);
 
-      map.renderAddresses(data.rows, filtro, cluster);
+      map.renderAddresses(data.rows, filtro, cluster, heat);
 
     }, config);
   }
@@ -47,27 +48,58 @@ $(function() {
   map.updateCluster = function() {
     var filtro = $('#search').val() || '';
     var cluster = $('li.clusterMarkers div.switch div').hasClass('switch-on');
+    var heat = $('li.heatMarkers div.switch div').hasClass('switch-on');
 
     map.spin(true);
     // allow dom to repaint,
     // see http://stackoverflow.com/a/4005365, http://stackoverflow.com/a/12022571
     window.setTimeout(function() {
-      map.renderAddresses(map.data, filtro, cluster);
+      map.renderAddresses(map.data, filtro, cluster, heat);
       map.spin(false);
     }, 50);
   };
 
    // add a method to my map to render every address
-  map.renderAddresses = function(addresses, filtro, cluster) {
+  map.renderAddresses = function(addresses, filtro, cluster, heat) {
     console.log('rendering ' + addresses.length + ' addresses');
 
     if (map.addresses) map.addresses.clearLayers();
-    map.addresses = cluster ? new L.MarkerClusterGroup() : new L.LayerGroup();
-    map.addLayer(map.addresses);
 
     // save a copy of the data
     // so that I can rerender without reading from the web service
     map.data = addresses;
+
+    if (!heat) {
+      if (map.hasLayer(map.heatmapLayer)) {
+        map.removeLayer(map.heatmapLayer);
+        map.heatmapLayer = null;
+      }
+    }
+
+    if (heat) {
+      var heatData = {
+        max: 8,
+        data: addresses
+      };
+      var config = {
+        radius: 20,
+        maxOpacity: 0.7,
+        scaleRadius: false,
+        useLocalExtrema: true,
+        latField: 'lat',
+        lngField: 'lon',
+        // valueField: 'value'
+      };
+
+      if (map.hasLayer(map.heatmapLayer)) map.removeLayer(map.heatmapLayer);
+      map.heatmapLayer = new HeatmapOverlay(config);
+      map.addLayer(map.heatmapLayer);
+      map.heatmapLayer.setData(heatData);
+      return;
+    }
+
+    map.addresses = cluster ? new L.MarkerClusterGroup() : new L.LayerGroup();
+    map.addLayer(map.addresses);
 
     var formatUrl = function(url) {
       return url.substr(0, 7) === 'http://' ? url : 'http://' + url;
@@ -173,6 +205,13 @@ $(function() {
   }, 800));
 
   $('.clusterMarkers label').on('click', function(e) {
+    // give time for switch plugin to change the value of the checkbox
+    window.setTimeout(function() {
+      map.updateCluster();
+    }, 100);
+  });
+
+  $('.heatMarkers label').on('click', function(e) {
     // give time for switch plugin to change the value of the checkbox
     window.setTimeout(function() {
       map.updateCluster();
