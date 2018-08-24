@@ -172,13 +172,6 @@ $(function() {
     renderAddresses();
   }, 800));
 
-  // $('.clusterMarkers').on('click', function(e) {
-  //   // give time for switch plugin to change the value of the checkbox
-  //   window.setTimeout(function() {
-  //     map.updateCluster();
-  //   }, 100);
-  // });
-
   $('.clusterMarkers label').on('click', function(e) {
     // give time for switch plugin to change the value of the checkbox
     window.setTimeout(function() {
