@@ -38,7 +38,7 @@ var fetchLocations = function(filter, tipos, subTipos, bounds, callback, config)
   if (boundQuery) conditions.push(boundQuery);
 
   if (filter) {
-    var filterQuery = 
+    var filterQuery =
       "lower(nombre) like '%" + filter + "%' or " +
       "lower(direccion) like '%" + filter + "%'";
     conditions.push(filterQuery);
@@ -61,17 +61,17 @@ var fetchLocations = function(filter, tipos, subTipos, bounds, callback, config)
   }
 
   if (tiposConditions.length > 0) {
-    conditions.push( '(' + tiposConditions.join(' or ') + ')');    
+    conditions.push( '(' + tiposConditions.join(' or ') + ')');
   }
 
   if (conditions.length > 0) {
     query += ' where (' + conditions.join(') and (') + ')';
   }
 
-  //http://devel.cartodb.com/api/v2/sql?q=select%20*%20from%20cultura%20limit%2020
+  //https://devel.cartodb.com/api/v2/sql?q=select%20*%20from%20cultura%20limit%2020
   if (debug) console.log(query);
 
-  var url = 'http://' + config.user + '.cartodb.com/api/v2/sql?' +
+  var url = 'https://' + config.user + '.cartodb.com/api/v2/sql?' +
     'q=' + encodeURIComponent(query) +
     (config.apikey ? '&api_key=' + config.apikey : '');
 
